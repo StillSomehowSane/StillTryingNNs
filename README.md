@@ -1,2 +1,4 @@
-### Basics of Backpropagation
-Reference material: https://pyimagesearch.com/2021/05/06/backpropagation-from-scratch-with-python/
+### Exploring the limits of Neural Networks
+
+#### Folders for each subject
+ - NN-01 - Explores backpropagation to solve the XOR problem.
