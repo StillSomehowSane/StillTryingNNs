@@ -4,12 +4,15 @@ class NeuralNetwork:
     def __init__(self, layers, alpha=0.1):
         self.W = []
         self.layers = layers
-        self.alpha = alpha
+        self.alpha = alpha # Learning rate, needed when updating weights later.
 
         for i in np.arange(0, len(layers) - 2):
+            # Random weights for a fully connected network.
+            # +1 is accounting for the bias.
             w = np.random.randn(layers[i] + 1, layers[i + 1] + 1)
-            self.W.append(w / np.sqrt(layers[i]))
+            self.W.append(w / np.sqrt(layers[i])) # Initial Weights, scaled down for normalization.
 
+        # Weights for the last layer does not need the bias.
         w = np.random.randn(layers[-2] + 1, layers[-1])
         self.W.append(w / np.sqrt(layers[-2]))
 
