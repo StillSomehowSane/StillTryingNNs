@@ -1,6 +1,7 @@
 import numpy as np
 
 class NeuralNetwork:
+    # Create the network's internal architecture.
     def __init__(self, layers, alpha=0.1):
         self.W = []
         self.layers = layers
@@ -20,25 +21,32 @@ class NeuralNetwork:
         return "NeuralNetwork: {}".format(
             "-".join(str(l) for l in self.layers))
 
+    # Activation function for forward pass.
     def sigmoid(self, x):
         return 1.0 / (1 + np.exp(-x))
 
+    # Activation function for backward passes.
     def sigmoid_deriv(self, x):
         return x * (1 - x)
 
     def fit(self, X, y, epochs=1000, displayUpdate=100):
+
+        # Insert a column of 1's for the bias.
         X = np.c_[X, np.ones((X.shape[0]))]
     
         for epoch in np.arange(0, epochs):
         
+            # Send training data through the feed foward step.
             for (x, target) in zip(X, y):
                 self.fit_partial(x, target)
         
+            # Ever so often check the error after the forward pass is complete.
             if epoch == 0 or (epoch + 1) % displayUpdate == 0:
                 loss = self.calculate_loss(X, y)
                 print("[INFO] epoch={}, loss={:.7f}".format(
                     epoch + 1, loss))
 
+    # Feed forward calculation
     def fit_partial(self, x, y):
         A = [np.atleast_2d(x)]
 
